@@ -1,1 +1,123 @@
+#include <stdio.h>
 
+struct cricket
+{
+  char name[20],country[20];
+  int score, wickets, matches;
+  float av_score;
+}player[22]; 
+
+void insertionsort(int runs[], int n)
+{
+  int i, t, j;
+    for (i = 1; i < n; i++)
+    {
+        t = runs[i];
+        j = i - 1;
+ 
+        while (j >= 0 && runs[j] > t)
+        {
+            runs[j + 1] = runs[j];
+            runs[j]=t;
+            j = j - 1;
+        }
+        
+    }
+    for (int a=0;a<n;a++)
+    {
+      printf("%d ", runs[a]);
+    }
+}
+
+void Sort(int wickets[], int n)
+{
+  int i, t, j;
+    for (i = 1; i < n; i++)
+    {
+        t = wickets[i];
+        j = i - 1;
+ 
+        while (j >= 0 && wickets[j] > t)
+        {
+            wickets[j + 1] = wickets[j];
+            wickets[j]=t;
+            j = j - 1;
+        }
+        
+    }
+    for (int a=0;a<n;a++)
+    {
+      printf("%d ", wickets[a]);
+    }
+}
+
+int main(void) 
+{
+  int runs[1000], wickets[1000];
+  int n,opt;
+  printf("Enter no of players:\n");  
+  scanf("%d",&n);
+  for(int i=0;i<n;i++)
+  {
+    printf("Enter player %d info(name runs wickets matches country):\n", i);
+    scanf("%s %d %d %d %s", player[i].name, &player[i].score, &player[i].wickets, &player[i].matches, player[i].country);
+  }z:
+  printf("Enter your choice:\n0. sort players acc to runs\n1. display player with highest runs\n2. sort players acc to runs\n3. no of bowlers of a country\n4. display player with highest wickets\n5. show");
+  scanf("%d", &opt);
+  switch (opt)
+  {
+    case 0:
+    {
+
+      for(int i=0;i<=n;i++)
+      {
+        player[i].av_score=player[i].score/player[i].matches;
+        runs[i]=player[i].av_score;
+      }
+      insertionsort(runs ,n);
+    }
+    break;
+    case 1:
+    {
+      for(int i=0;i<=n;i++)
+      {
+        runs[i]=player[i].score;
+      }
+      int p;
+      int Largest = runs[0];
+      for(int i=1; i<n; i++)
+      {
+        if(Largest<runs[i])
+        {
+          Largest=runs[i];
+          p = i;
+        }
+      }
+      printf("\nPlayer with highest average is : %s, \nwith average : %f", player[p].name, player[p].av_score);
+    }
+    break;
+    case 2:
+    {
+      for(int i=0;i<=n;i++)
+      {
+        wickets[i]=player[i].score;
+      }
+      Sort(wickets ,n);
+    }
+    break;
+    case 3:{}
+    break;
+    case 4:
+    {}
+    break;
+    case 5:
+    {
+      printf("PLAYER_NAME\tRUNS\tWICKETS\tAVERAGE\n");
+      for(int i=1;i<=n;i++)
+      {
+        printf("%s\t\t\t%d\t\t%d\t\t%.2f\n", player[i].name, player[i].score, player[i].wickets, player[i].av_score);
+      }
+    }
+    break;
+  }goto z;
+}
