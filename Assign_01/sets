@@ -1,0 +1,225 @@
+#include <stdio.h>
+#define MAX_SIZE 100
+int main(void) 
+{
+  int S1[MAX_SIZE], S2[MAX_SIZE], arr_u[MAX_SIZE], arr_d[MAX_SIZE], arr_sd[MAX_SIZE],arr_i[MAX_SIZE] ;
+    int i, m,n,j,k,l,d,e,optn;
+    char operation;
+    printf("Enter size of array_1: ");
+    scanf("%d", &m);
+    printf("Enter %d elements in the array : ", m);
+    for(i=0; i<m; i++)
+    {
+        scanf("%d", &S1[i]);
+    }
+
+    printf("Enter size of array_2: ");
+    scanf("%d", &n);
+    printf("Enter %d elements in the array : ", n);
+    for(i=0; i<n; i++)
+    {
+        scanf("%d", &S2[i]);
+    }
+    A:
+    printf("\n \n");
+    printf("Enter the operation:\nA - union\nB - intersection\nC - Difference\nD - Symmetric difference\nE - Exit ");
+    scanf("%s", &operation);
+    switch (operation)
+    {
+     case 'A':
+     for(k=0;k<=m+n;k++)
+     {
+       arr_u[k]=0;
+     }
+     int j=0;
+     for(int a=0; a<m; a++)
+     {
+        arr_u[j]=S1[a];
+        j++;
+     } //printf("%d",j);
+     for(int z=0;z<n;z++)
+     {
+       int r=0;
+       for(int y=0;y<m;y++)
+       {
+         if(S2[z]==S1[y])
+         { 
+           r=1;
+           break;
+         }
+       }
+       if(r==0)
+       { arr_u[j]=S2[z]; j++; }
+     }
+     //printf("%d",j);
+     printf("{ ");
+     for(l=0;l<j;l++)
+     {
+       printf("%d, ", arr_u[l]);
+     }
+     printf("}");
+     break;
+     
+     case 'B':
+     for(k=0;k<=m+n;k++)
+     {
+       arr_i[k]=0;
+     }
+     {
+       for(int z=0;z<n;z++)
+       {
+        int r=0;
+        for(int y=0;y<m;y++)
+        {
+         if(S2[z]==S1[y])
+         { 
+           arr_i[d]=S2[z]; d++;
+         }
+        }
+       }
+       //printf("%d",j);
+       printf("{ ");
+       for(l=0;l<d;l++)
+       {
+         printf("%d, ", arr_i[l]);
+       }
+       printf("}");
+       break;
+     }
+     
+    
+
+     case 'C':
+     for(k=0;k<=m+n;k++)
+     {
+       arr_d[k]=0;
+     }
+
+     printf("Select one option:\n0: set A - set B\n1: set B - set A\n");
+     scanf("%d", &optn);
+     if( optn==1)
+     
+     {
+       for(int z=0;z<n;z++)
+     {
+       int r=0;
+       for(int y=0;y<m;y++)
+       {
+         if(S2[z]==S1[y])
+         { 
+           r=1;
+           break;
+         }
+       }
+       if(r==0)
+       { arr_d[d]=S2[z]; d++; }
+     }
+     //printf("%d",j);
+     printf("{ ");
+     for(l=0;l<d;l++)
+     {
+       printf("%d, ", arr_d[l]);
+     }printf("}");
+     break;
+    }
+     
+     
+     else if( optn ==0)
+    {
+       for(int z=0;z<m;z++)
+     {
+       int r=0;
+       for(int y=0;y<=n;y++)
+       {
+         if(S2[y]==S1[z])
+         { 
+           r=1;
+           break;
+         }
+       }
+       if(r==0)
+       { arr_d[d]=S1[z]; d++; }
+     }
+     printf("{ ");
+     for(l=0;l<d;l++)
+     {
+       printf("%d, ", arr_d[l]);
+     }printf("}");
+     break;
+    }
+    
+    
+    case 'D':
+    for(k=0;k<=m+n;k++)
+     {
+       arr_u[k]=0;
+     }
+     int t=0;
+     for(int a=0; a<m; a++)
+     {
+        arr_u[t]=S1[a];
+        t++;
+     } //printf("%d",j);
+     for(int z=0;z<n;z++)
+     {
+       int r=0;
+       for(int y=0;y<m;y++)
+       {
+         if(S2[z]==S1[y])
+         { 
+           r=1;
+           break;
+         }
+       }
+       if(r==0)
+       { arr_u[t]=S2[z]; t++; }
+     }
+     
+     
+     for(k=0;k<=m+n;k++)
+     {
+       arr_i[k]=0;
+     }
+     
+       for(int z=0;z<n;z++)
+       {
+        int r=0;
+        for(int y=0;y<m;y++)
+        {
+         if(S1[y]==S2[z])
+         { 
+           arr_i[d]=S2[z]; d++;
+         }
+        }
+       }
+     
+       int s=0;
+       for(int g=0;g<t;g++)
+     {
+       int r=0;
+       for(int h=0;h<d;h++)
+       {
+         if(arr_u[g]==arr_i[h])
+         { 
+           r=1;
+           break;
+         }
+       }
+       if(r==0)
+       { arr_sd[s]=arr_u[g]; s++; }
+     }
+     printf("{ ");
+     for(l=0;l<s;l++)
+     {
+       printf("%d, ", arr_sd[l]);
+     }printf("}");
+     break;  
+
+     case 'E':
+     goto b;
+     break;
+     
+    }
+    goto A;
+    b: printf("");
+  }
