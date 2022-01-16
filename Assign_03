@@ -1,1 +1,162 @@
+#include <stdio.h>
 
+int sparse(int arr[100][100]);
+
+int main(void) 
+{
+  int a[100][100],x[100][100],b[100][100],y[100][100]; int i,j,k,r,r1,c,c1,z;
+  int n[100][100];
+  printf("Enter no of rows and columns: ");
+  scanf("%d %d",&r,&c);
+  for(i=0;i<r;i++)
+  {
+    for(j=0;j<c;j++)
+    { a[i][j]=0; }
+  }
+  printf("\nMatrix 1");
+  printf("\nEnter the values :");
+  for(i=0;i<r;i++)
+  {
+    for(j=0;j<c;j++)
+    { scanf("%d", &a[i][j]); }
+  }k=1;
+  for(i=0;i<r;i++)
+  {
+    for(j=0;j<c;j++)
+    {
+      if(a[i][j]!=0)
+      {
+        x[k][0]=i;
+        x[k][1]=j;
+        x[k][2]=a[i][j];
+        k++;
+      }
+    }
+  }
+  x[0][0]=r;x[0][1]=c;x[0][2]=k-1;
+   for(i=0;i<k;i++)
+  {
+    for(j=0;j<3;j++)
+    {
+      printf("%d\t",x[i][j]);
+    }printf("\n");
+  }
+  printf("\nMatrix 2");
+  printf("Enter no of rows and columns: ");
+  scanf("%d %d",&r1,&c1);
+  for(i=0;i<r1;i++)
+  {
+    for(j=0;j<c1;j++)
+    { b[i][j]=0; }
+  }
+  printf("\nEnter the values :");
+  for(i=0;i<r1;i++)
+  {
+    for(j=0;j<c1;j++)
+    { scanf("%d", &b[i][j]); }
+  }
+  z=1;
+  for(i=0;i<r1;i++)
+  {
+    for(j=0;j<c1;j++)
+    {
+      if(b[i][j]!=0)
+      {
+        y[z][0]=i;
+        y[z][1]=j;
+        y[z][2]=b[i][j];
+        z++;
+      }
+    }
+  }
+  y[0][0]=r1;y[0][1]=c1;y[0][2]=z-1;
+  for(i=0;i<z;i++)
+  {
+    for(j=0;j<3;j++)
+    {
+      printf("%d\t",y[i][j]);
+    }printf("\n");
+  } 
+
+printf("\n ");
+int s;
+i=j=1;  
+while(i<k&&j<z)
+  {
+    if(x[i][0]<y[j][0])
+    {
+      n[s][0]=x[i][0];
+      n[s][1]=x[i][1];
+      n[s][2]=x[i][2];
+      i++;
+      s++;
+    }
+    else if(x[i][0]>y[j][0])
+    {
+      n[s][0]=y[j][0];
+      n[s][1]=y[j][1];
+      n[s][2]=y[j][2];
+      j++;
+      s++;
+    }
+    else if(x[i][0]==y[j][0])
+    {
+      if(x[i][1]<y[j][1])
+    {
+      n[s][0]=x[i][0];
+      n[s][1]=x[i][1];
+      n[s][2]=x[i][2];
+      i++;
+      s++;
+    }
+    else if(x[i][1]>y[j][1])
+    {
+      n[s][0]=y[j][0];
+      n[s][1]=y[j][1];
+      n[s][2]=y[j][2];
+      j++;
+      s++;
+    }
+    else if(x[i][1]==y[j][1])
+    {
+      n[s][0]=x[i][0];
+      n[s][1]=x[i][1];
+      n[s][2]=y[j][2]+x[i][2];
+      j++;i++;
+      s++;
+    }
+    }
+  }
+   
+while(i<k)        //copyremaining terms from x
+    {
+n[s][0]=x[i][0];
+n[s][1]=x[i][1];       
+n[s][2]=x[i][2];       
+i++;       
+s++;
+    }
+   
+while(j<z)        //copyremaining terms from y
+    {
+n[s][0]=y[j][0];      
+n[s][1]=x[j][1];      
+n[s][2]=x[j][2];      
+j++;      
+s++;
+    }
+    printf("R\tC\tV\t");
+for(i=0;i<s;i++)
+  {
+    for(j=0;j<3;j++)
+    {
+      printf("%d\t",n[i][j]);
+    }printf("\n");
+  }
+}
+
+
+/*Implement a sparse arix with operations like initialize empty sparse arix, insert an element, add two arices, transpose a matrix
+
+if(x[0][0]!=y[0][0]||x[0][1]!=y[0][1])
+ {  printf("\n Invalid Input"); }*/
